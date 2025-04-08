@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEX Assistant</title>
+    <link rel="icon" href="images/Grab-Logo.png" type="image/png">
+    <link rel="stylesheet" href="mex.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <img src="images/Grab-Logo.png" alt="Grab Logo">
+        <h1>Welcome to MEX Assistant!</h1>
+        <form id="merchant">
+            <input type="text" id="merchantID" placeholder="Enter your merchant ID">
+            <button type="submit">Confirm</button>
+        </form>
+        <!-- Message output -->
+        <p id="result"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script>
+    let merchantData = [];  // Store full merchant data
+
+    // Define the headers manually (to match the CSV columns)
+    const headers = ['merchant_id', 'merchant_name', 'join_date', 'city_id'];
+
+    // Fetch and parse the CSV on page load
+    fetch('../Dataset/merchant.csv')
+        .then(response => response.text())
+        .then(csvText => {
+            const parsed = Papa.parse(csvText, {
+                header: false,
+                delimiter: ",",  // Use comma as delimiter
+                skipEmptyLines: true
+            });
+
+            // Manually assign headers to the rows
+            merchantData = parsed.data.map(row => {
+                return {
+                    merchant_id: row[0],
+                    merchant_name: row[1],
+                    join_date: row[2],
+                    city_id: row[3]
+                };
+            });
+
+            console.log("Merchant Data:", merchantData);  // Log the full data for verification
+        })
+        .catch(error => console.error("Error loading CSV:", error));
+
+    // Form submission handler
+    document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const inputId = document.getElementById("merchantID").value.trim();
+        const resultEl = document.getElementById("result");
+
+        if (!inputId) {
+            resultEl.textContent = "⚠️ Please enter a Merchant ID.";
+            resultEl.style.color = "orange";
+            return;
+        }
+
+        // Check if the Merchant ID exists in the data
+        const matchedMerchant = merchantData.find(
+            m => m.merchant_id.trim() === inputId
+        );
+
+        if (matchedMerchant) {
+            resultEl.textContent = "Welcome, " + matchedMerchant.merchant_name;  // Show the merchant name
+            resultEl.style.color = "green";
+
+            // Store the merchant_name in localStorage for use on the next page
+            localStorage.setItem('merchant_name', matchedMerchant.merchant_name);
+            
+            // Redirect to chatbot.html after a successful match
+            setTimeout(() => {
+                window.location.href = 'chatbot.html'; // Redirect to chatbot page
+            }, 1500); // Delay to show the success message for 1.5 seconds
+        } else {
+            resultEl.textContent = "❌ Merchant ID not found. Try again.";
+            resultEl.style.color = "red";
+        }
+    });
+</script>
+
+</body>
+</html>

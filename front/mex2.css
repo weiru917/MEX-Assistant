@@ -1,0 +1,12 @@
+header {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.header-icon {
+    width: 5%; 
+    height: 5%;
+    margin-right: 10px;
+}
