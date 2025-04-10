@@ -15,6 +15,28 @@
         <img src="images/Grab-Logo.png" alt="Icon" class="header-icon">
         MEX Assistant
     </header>    
-</body>
+    
+    <!--Chat Body-->
+    <div class="chat-body">
+        <div class="botmsg">
+            <div class="sender-name">MEXY</div>
+            <!-- Initially displaying "Welcome Merchant!" but we'll change it dynamically -->
+            <div class="message" id="welcomeMessage">Welcome Merchant! <br> How can I assist you today?</div>
+        </div>
+        <div class="usermsg">
+            <div class="sender-name" id="userSenderName">Bagel Bros</div>
+            <div class="message">Show me my sales report.</div>
+        </div>
+    </div>
 
+    <!--Chat Footer-->
+    <div class="chat-footer">
+        <form action="#" class="chat-form">
+            <textarea placeholder="Ask me anything about your business..." class="inputmsg"></textarea>
+            <button type="submit" id="send-message"><img src="images/send.png" alt="Send"></button>
+        </form>
+    </div>
+
+    <script src="chatbot.js"></script>
+</body>
 </html>
