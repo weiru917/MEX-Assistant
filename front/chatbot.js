@@ -58,22 +58,22 @@ function formatBotResponse(response) {
     let inList = false;
 
     lines.forEach((line) => {
-        const trimmedLine = line.trim();
+        let trimmedLine = line.trim();
 
-        if (trimmedLine === "") {
-            // Skip empty lines
-            return;
-        }
+        if (trimmedLine === "") return; // Skip empty lines
+
+        // Replace markdown-style bold (**text**) with <strong>text</strong>
+        trimmedLine = trimmedLine.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
         if (/^\d+\.\s+/.test(trimmedLine)) {
-            // Start or continue a numbered list
+            // Numbered list
             if (!inList) {
                 formatted += "<ol>";
                 inList = true;
             }
             formatted += `<li>${trimmedLine.replace(/^\d+\.\s+/, "")}</li>`;
         } else if (/^[-*]\s+/.test(trimmedLine)) {
-            // Start or continue a bullet list
+            // Bullet list
             if (!inList) {
                 formatted += "<ul>";
                 inList = true;
@@ -82,22 +82,23 @@ function formatBotResponse(response) {
         } else {
             // Close any open list
             if (inList) {
-                formatted += formatted.endsWith("</ul>") ? "</ul>" : "</ol>";
+                formatted += formatted.includes("<ul>") ? "</ul>" : "</ol>";
                 inList = false;
             }
 
-            // Add as paragraph
+            // Regular paragraph
             formatted += `<p>${trimmedLine}</p>`;
         }
     });
 
-    // Close list if it was still open
+    // Close list if still open
     if (inList) {
         formatted += formatted.includes("<ul>") ? "</ul>" : "</ol>";
     }
 
     return formatted;
 }
+
 
 // Send message logic
 async function handleOutgoingMessage(e) {
