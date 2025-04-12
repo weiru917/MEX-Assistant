@@ -65,6 +65,14 @@ body {
     word-wrap: break-word;
 }
 
+/* Remove excessive spacing in content formatting */
+.botmsg p,
+.botmsg h4,
+.usermsg p,
+.usermsg h4 {
+    margin: 4px 0;
+}
+
 /* Bot message styling */
 .botmsg {
     display: flex;
