@@ -26,3 +26,7 @@ Explore the interface prototype here:
 # 👩‍💻 Presentation Slide
 View the presentation slide here:
 🔗 https://www.canva.com/design/DAGkV7gOzhQ/1cdv1s5YoB9S1nW6hPvStA/view?utm_content=DAGkV7gOzhQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hab54f3ee99
+
+# 🎥 Demo Video
+View the demo video here: 
+🔗 https://drive.google.com/file/d/1nTtY0XDnyGYPbN2akVI1vp4sMkM90QXX/view?usp=sharing
