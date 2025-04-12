@@ -210,9 +210,9 @@ function generateMerchantInsights(merchantId, datasets) {
     throw new Error('Missing required parameters: merchantId or datasets');
   }
 
-  const { merchants, items, transactionData, transactionItems, updated_orders} = datasets;
+  const { merchants, updated_orders} = datasets;
   
-  if (!merchants || !items || !transactionData || !transactionItems || !updated_orders) {
+  if (!merchants || !updated_orders) {
     console.warn('Warning: One or more dataset is missing');
   }
   

@@ -23,12 +23,12 @@ const TARGET_MERCHANT_ID = '3e2b6'; // Hardcoded merchant ID for initial develop
 
 async function loadAllData() {
   try {
-    datasets.merchants = await loadCSV('./dataset/merchant.csv');
-    datasets.items = await loadCSV('./dataset/items.csv');
-    datasets.keywords = await loadCSV('./dataset/keywords.csv');
     datasets.updated_orders = await loadCSV('./dataset/updated_orders.csv');
-    datasets.transactionData = await loadCSV('./dataset/transaction.zip', true, 'transaction_data.csv');
-    datasets.transactionItems = await loadCSV('./dataset/transaction.zip', true, 'transaction_items.csv');
+    datasets.merchants = await loadCSV('./dataset/merchant.csv');
+    // datasets.items = await loadCSV('./dataset/items.csv');
+    // datasets.keywords = await loadCSV('./dataset/keywords.csv');
+    // datasets.transactionData = await loadCSV('./dataset/transaction.zip', true, 'transaction_data.csv');
+    // datasets.transactionItems = await loadCSV('./dataset/transaction.zip', true, 'transaction_items.csv');
     console.log("✅ All datasets loaded");
     
     // Cache insights for the hardcoded merchant
